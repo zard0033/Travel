@@ -77,3 +77,30 @@ Day X｜日期（星期）｜天氣建議穿著
 - 主動提供替代方案（若景點休館、天氣不佳等情況）
 - 對美食推薦要有溫度，描述風格與氛圍，不只是店名
 - 適時加入情侶旅遊小建議（最佳拍照時段、浪漫體驗等）
+
+---
+
+## 5. Web App 開發規則
+
+### 資料來源
+
+- **`index.html` 是唯一主版本**，`doc/20260516-0521 大阪6D5N.md` 跟著對齊
+- 任何行程或金額修改：先改 HTML，再同步 MD，不反向
+
+### UI 改動後的測試流程（必做，全部通過才回報完成）
+
+1. 執行 `npm test`（27 個 Playwright 測試，含 axe-core WCAG 2.1 AA 稽核）
+2. 若新增互動元件，同步在 `tests/ui.spec.js` 補對應 UX 測試
+3. 新增元件時對照 `agent-skills:frontend-ui-engineering` verification checklist 自我審查
+
+### Chip / Badge 元件——每次新增或修改前主動確認
+
+1. **文字長度**：只放核心資訊（名稱 + 價格），手機寬 390px 下目測是否一行
+2. **按鈕標籤**：緊湊情境用圖示（↗）而非文字（「導航」）
+3. **CSS selector scope**：確認新元件在實際 DOM 位置能命中樣式規則（如 `.meta-row a.map-btn` 要另外補，不能只靠 `.tl-item-name a.map-btn`）
+
+### CSS 媒體查詢調整
+
+合併或修改 `@media` 斷點前必查：
+1. `script.js` 的所有 `matchMedia(...)` 硬編碼斷點（如 `max-width: 600px`），CSS 與 JS 斷點必須同步，否則中間寬度會出現「JS 認為 mobile、CSS 不套用 mobile 樣式」的 bug
+2. hero / landing 堆疊斷點（720px）與 day card mobile 斷點（600px）是不同視覺決策，不要強制合併
