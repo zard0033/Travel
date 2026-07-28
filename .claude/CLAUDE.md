@@ -91,7 +91,6 @@ Day X｜日期（星期）｜天氣建議穿著
 
 1. 執行 `npm test`（27 個 Playwright 測試，含 axe-core WCAG 2.1 AA 稽核）
 2. 若新增互動元件，同步在 `tests/ui.spec.js` 補對應 UX 測試
-3. 新增元件時對照 `agent-skills:frontend-ui-engineering` verification checklist 自我審查
 
 ### Chip / Badge 元件——每次新增或修改前主動確認
 
