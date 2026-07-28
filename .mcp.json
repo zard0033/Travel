@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "norikae": {
+      "command": "npx",
+      "args": ["-y", "norikae-mcp"]
+    }
+  }
+}
